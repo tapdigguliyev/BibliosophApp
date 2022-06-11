@@ -3,8 +3,8 @@ package com.example.bibliosoph.model.repository
 import com.example.bibliosoph.model.Book
 import com.example.bibliosoph.model.room.relations.BookAndGenre
 import com.example.bibliosoph.model.Genre
-import com.example.bibliosoph.model.room.BookDao
-import com.example.bibliosoph.model.room.GenreDao
+import com.example.bibliosoph.model.room.daos.BookDao
+import com.example.bibliosoph.model.room.daos.GenreDao
 import kotlinx.coroutines.flow.Flow
 
 class BibliosophRepositoryImpl(

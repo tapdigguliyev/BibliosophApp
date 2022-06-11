@@ -1,4 +1,4 @@
-package com.example.bibliosoph.model.room
+package com.example.bibliosoph.model.room.daos
 
 import androidx.room.*
 import com.example.bibliosoph.model.Book

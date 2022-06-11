@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.bibliosoph.model.Book
 import com.example.bibliosoph.model.Genre
+import com.example.bibliosoph.model.room.daos.BookDao
+import com.example.bibliosoph.model.room.daos.GenreDao
 
 
 const val DATABASE_VERSION = 1
