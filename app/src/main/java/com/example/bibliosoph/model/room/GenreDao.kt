@@ -11,14 +11,14 @@ import com.example.bibliosoph.model.room.relations.BooksByGenre
 interface GenreDao {
 
     @Query("SELECT * FROM genres")
-    fun getGenres(): List<Genre>
+    suspend fun getGenres(): List<Genre>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addGenres(genres: List<Genre>)
+    suspend fun addGenres(genres: List<Genre>)
 
     @Query("SELECT * FROM genres WHERE id = :genreId")
-    fun getGenreById(genreId: String): Genre
+    suspend fun getGenreById(genreId: String): Genre
 
     @Query("SELECT * FROM genres WHERE id = :genreId")
-    fun getBooksByGenre(genreId: String): BooksByGenre
+    suspend fun getBooksByGenre(genreId: String): BooksByGenre
 }
