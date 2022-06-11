@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.bibliosoph.model.Genre
+import com.example.bibliosoph.model.room.relations.BooksByGenre
 
 @Dao
 interface GenreDao {
@@ -17,4 +18,7 @@ interface GenreDao {
 
     @Query("SELECT * FROM genres WHERE id = :genreId")
     fun getGenreById(genreId: String): Genre
+
+    @Query("SELECT * FROM genres WHERE id = :genreId")
+    fun getBooksByGenre(genreId: String): BooksByGenre
 }

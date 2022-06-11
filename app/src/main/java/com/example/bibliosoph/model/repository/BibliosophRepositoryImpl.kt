@@ -24,4 +24,10 @@ class BibliosophRepositoryImpl(
     override fun addGenres(genres: List<Genre>) = genreDao.addGenres(genres)
 
     override fun getGenreById(genreId: String): Genre = genreDao.getGenreById(genreId)
+
+    override fun getBooksByGenre(genreId: String): List<BookAndGenre> =
+        genreDao.getBooksByGenre(genreId).let { booksByGenre ->
+            val books = booksByGenre.books ?: return emptyList()
+            return books.map { BookAndGenre(it, booksByGenre.genre) }
+        }
 }

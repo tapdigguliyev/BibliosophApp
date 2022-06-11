@@ -19,4 +19,6 @@ interface BibliosophRepository {
     fun addGenres(genres: List<Genre>)
 
     fun getGenreById(genreId: String): Genre
+
+    fun getBooksByGenre(genreId: String): List<BookAndGenre>
 }
