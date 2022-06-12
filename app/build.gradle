@@ -50,6 +50,10 @@ dependencies {
 
     //Coroutines dependency
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+    implementation 'androidx.room:room-ktx:2.4.2'
+
+    //Lifecycle dependency
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

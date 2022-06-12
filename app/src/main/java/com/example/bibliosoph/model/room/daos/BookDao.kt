@@ -3,13 +3,13 @@ package com.example.bibliosoph.model.room.daos
 import androidx.room.*
 import com.example.bibliosoph.model.Book
 import com.example.bibliosoph.model.room.relations.BookAndGenre
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BookDao {
 
+    @Transaction
     @Query("SELECT * FROM books")
-    fun getBooks(): Flow<List<BookAndGenre>>
+    suspend fun getBooks(): List<BookAndGenre> //TODO: Kotlin Flow may be required in the future
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addBook(book: Book)
@@ -17,6 +17,7 @@ interface BookDao {
     @Delete
     suspend fun removeBook(book: Book)
 
+    @Transaction
     @Query("SELECT * FROM books WHERE id = :bookId")
     suspend fun getBookById(bookId: String): BookAndGenre
 }

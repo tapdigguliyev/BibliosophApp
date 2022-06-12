@@ -3,6 +3,7 @@ package com.example.bibliosoph.model.room.relations
 import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Relation
+import androidx.room.Transaction
 import com.example.bibliosoph.model.Book
 import com.example.bibliosoph.model.Genre
 import kotlinx.parcelize.Parcelize

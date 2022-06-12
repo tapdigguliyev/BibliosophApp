@@ -12,7 +12,7 @@ class BibliosophRepositoryImpl(
     private val genreDao: GenreDao
 ) : BibliosophRepository {
 
-    override fun getBooks(): Flow<List<BookAndGenre>> = bookDao.getBooks()
+    override suspend fun getBooks(): List<BookAndGenre> = bookDao.getBooks()
 
     override suspend fun addBook(book: Book) = bookDao.addBook(book)
 

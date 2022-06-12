@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface BibliosophRepository {
 
-    fun getBooks(): Flow<List<BookAndGenre>>
+    suspend fun getBooks(): List<BookAndGenre>
 
     suspend fun addBook(book: Book)
 

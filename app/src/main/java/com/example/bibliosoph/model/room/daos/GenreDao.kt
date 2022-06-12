@@ -1,9 +1,6 @@
 package com.example.bibliosoph.model.room.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.bibliosoph.model.Genre
 import com.example.bibliosoph.model.room.relations.BooksByGenre
 
@@ -19,6 +16,7 @@ interface GenreDao {
     @Query("SELECT * FROM genres WHERE id = :genreId")
     suspend fun getGenreById(genreId: String): Genre
 
+    @Transaction
     @Query("SELECT * FROM genres WHERE id = :genreId")
     suspend fun getBooksByGenre(genreId: String): BooksByGenre
 }
