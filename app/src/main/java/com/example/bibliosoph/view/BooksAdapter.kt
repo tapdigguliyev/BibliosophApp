@@ -18,4 +18,10 @@ class BooksAdapter : RecyclerView.Adapter<BooksViewHolder>() {
     }
 
     override fun getItemCount() = booksAndGenres.size
+
+    fun setData(books: List<BookAndGenre>) {
+        booksAndGenres.clear()
+        booksAndGenres.addAll(books)
+        notifyDataSetChanged()
+    }
 }
