@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.addbooks.AddBookActivity">
+
+    <EditText
+        android:id="@+id/addBookId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_standard"
+        android:layout_marginTop="@dimen/padding_standard_double"
+        android:hint="@string/book_number"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addBookName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_standard_half"
+        android:layout_marginEnd="@dimen/padding_standard_double"
+        android:hint="@string/enter_book_name"
+        android:inputType="textCapSentences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/addBookId"
+        app:layout_constraintTop_toTopOf="@id/addBookId" />
+
+    <EditText
+        android:id="@+id/addPageCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_standard"
+        android:hint="@string/page_count"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@id/addBookId"
+        app:layout_constraintTop_toBottomOf="@id/addGenre" />
+
+    <EditText
+        android:id="@+id/addGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_standard"
+        android:hint="@string/enter_genre"
+        android:inputType="textCapSentences"
+        app:layout_constraintStart_toStartOf="@id/addBookId"
+        app:layout_constraintTop_toBottomOf="@id/addBookId" />
+
+    <EditText
+        android:id="@+id/addStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_standard_double"
+        android:layout_marginTop="@dimen/padding_standard_double"
+        android:hint="Start date"
+        app:layout_constraintStart_toStartOf="@id/addBookId"
+        app:layout_constraintTop_toBottomOf="@id/addPageCount" />
+
+    <EditText
+        android:id="@+id/addEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_standard_double"
+        android:hint="End date"
+        app:layout_constraintEnd_toEndOf="@id/addBookName"
+        app:layout_constraintTop_toTopOf="@id/addStartDate" />
+
+    <Button
+        android:id="@+id/addBook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_standard_double"
+        android:text="Add Book"
+        app:layout_constraintEnd_toEndOf="@id/addBookName"
+        app:layout_constraintStart_toStartOf="@id/addBookId"
+        app:layout_constraintTop_toBottomOf="@id/addStartDate"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

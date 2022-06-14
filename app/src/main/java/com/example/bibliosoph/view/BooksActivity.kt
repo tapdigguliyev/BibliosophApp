@@ -1,5 +1,7 @@
 package com.example.bibliosoph.view
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
@@ -8,6 +10,7 @@ import com.example.bibliosoph.app.BibliosophApplication
 import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
 import com.example.bibliosoph.databinding.ActivityBooksBinding
+import com.example.bibliosoph.view.addbooks.AddBookActivity
 import kotlinx.coroutines.launch
 
 class BooksActivity : AppCompatActivity() {
@@ -15,6 +18,12 @@ class BooksActivity : AppCompatActivity() {
 
     private val repository by lazy { BibliosophApplication.repository }
     private val adapter by lazy { BooksAdapter() }
+
+    companion object{
+        fun intent(context: Context): Intent {
+            return Intent(context, AddBookActivity::class.java)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +44,10 @@ class BooksActivity : AppCompatActivity() {
                 showBooksView()
                 loadBooks()
             }
+        }
+
+        binding.addBookFloatingActionButton.setOnClickListener {
+            startActivity(intent(this))
         }
     }
 

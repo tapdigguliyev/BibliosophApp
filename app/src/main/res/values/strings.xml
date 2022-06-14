@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Bibliosoph</string>
     <string name="no_books_text">Read some books!</string>
+    <string name="book_number">No.</string>
+    <string name="enter_book_name">Enter book name</string>
+    <string name="page_count">Pg.</string>
+    <string name="enter_genre">Enter genre</string>
+    <string name="add_book">Add Book</string>
 </resources>

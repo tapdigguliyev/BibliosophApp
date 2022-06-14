@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Bibliosoph"
         tools:targetApi="31">
         <activity
+            android:name=".view.addbooks.AddBookActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.BooksActivity"
             android:exported="true">
             <intent-filter>
