@@ -6,16 +6,16 @@ import com.example.bibliosoph.model.room.relations.BookAndGenre
 
 class BooksViewHolder(private val binding: ItemBookBinding): RecyclerView.ViewHolder(binding.root) {
 
-    private lateinit var bookAndGenre: BookAndGenre
-
     fun bind(bookAndGenre: BookAndGenre) {
-        this.bookAndGenre = bookAndGenre
+        val (book, genre) = bookAndGenre
 
-        binding.bookId.text = bookAndGenre.book.id
-        binding.bookName.text = bookAndGenre.book.name
-        binding.pageCount.text = bookAndGenre.book.pageNumber
-        binding.genre.text = bookAndGenre.genre.name
-        binding.startDate.text = bookAndGenre.book.startDate.toString()
-        binding.endDate.text = bookAndGenre.book.endDate.toString()
+        binding.bookId.text = book.id
+        binding.bookName.text = book.name
+        binding.startDate.text = book.startDate
+        binding.endDate.text = book.endDate
+        binding.pageCount.text = book.pageNumber
+        binding.genre.text = genre.name
+        binding.startDate.text = book.startDate
+        binding.endDate.text = book.endDate
     }
 }

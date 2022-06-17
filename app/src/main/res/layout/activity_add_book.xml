@@ -37,34 +37,33 @@
         android:hint="@string/page_count"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@id/addBookId"
-        app:layout_constraintTop_toBottomOf="@id/addGenre" />
+        app:layout_constraintTop_toBottomOf="@id/addGenreSpinner" />
 
-    <EditText
-        android:id="@+id/addGenre"
+    <Spinner
+        android:id="@+id/addGenreSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_standard"
-        android:hint="@string/enter_genre"
-        android:inputType="textCapSentences"
+        android:spinnerMode="dialog"
         app:layout_constraintStart_toStartOf="@id/addBookId"
         app:layout_constraintTop_toBottomOf="@id/addBookId" />
 
-    <EditText
+    <TextView
         android:id="@+id/addStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_standard_double"
         android:layout_marginTop="@dimen/padding_standard_double"
-        android:hint="Start date"
+        android:hint="@string/start_date"
         app:layout_constraintStart_toStartOf="@id/addBookId"
         app:layout_constraintTop_toBottomOf="@id/addPageCount" />
 
-    <EditText
+    <TextView
         android:id="@+id/addEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/padding_standard_double"
-        android:hint="End date"
+        android:hint="@string/end_date"
         app:layout_constraintEnd_toEndOf="@id/addBookName"
         app:layout_constraintTop_toTopOf="@id/addStartDate" />
 
@@ -73,10 +72,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_standard_double"
-        android:text="Add Book"
+        android:text="@string/add_book"
         app:layout_constraintEnd_toEndOf="@id/addBookName"
         app:layout_constraintStart_toStartOf="@id/addBookId"
-        app:layout_constraintTop_toBottomOf="@id/addStartDate"/>
+        app:layout_constraintTop_toBottomOf="@id/addStartDate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
