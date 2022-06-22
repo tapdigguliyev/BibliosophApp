@@ -5,12 +5,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bibliosoph.app.BibliosophApplication
 import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
 import com.example.bibliosoph.databinding.ActivityBooksBinding
 import com.example.bibliosoph.view.addbooks.AddBookActivity
+import com.example.bibliosoph.view.books.SwipeHelperCallback
 import kotlinx.coroutines.launch
 
 class BooksActivity : AppCompatActivity() {
@@ -34,8 +36,7 @@ class BooksActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
-        binding.booksRecyclerView.adapter = adapter
-        binding.booksRecyclerView.layoutManager = LinearLayoutManager(this)
+        setupRecyclerView()
 
         lifecycleScope.launch {
             if(getBooks().isEmpty()) {
@@ -49,6 +50,14 @@ class BooksActivity : AppCompatActivity() {
         binding.addBookFloatingActionButton.setOnClickListener {
             startActivity(intent(this))
         }
+    }
+
+    private fun setupRecyclerView() {
+        binding.booksRecyclerView.adapter = adapter
+        binding.booksRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        val itemTouchHelper = ItemTouchHelper(SwipeHelperCallback(this, adapter))
+        itemTouchHelper.attachToRecyclerView(binding.booksRecyclerView)
     }
 
     private fun loadBooks() = lifecycleScope.launch{
