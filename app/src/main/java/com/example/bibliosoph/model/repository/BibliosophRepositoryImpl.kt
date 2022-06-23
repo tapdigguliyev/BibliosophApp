@@ -12,7 +12,10 @@ class BibliosophRepositoryImpl(
     private val genreDao: GenreDao
 ) : BibliosophRepository {
 
-    override suspend fun getBooks(): List<BookAndGenre> = bookDao.getBooks()
+    override suspend fun getBooks(): List<BookAndGenre> = getBooksIds().map { getBookById(it.toString()) }
+
+    override suspend fun getBooksIds(): List<Int> =
+        bookDao.getBooksIds().map { it.toInt() }.toSortedSet().toList()
 
     override suspend fun addBook(book: Book) = bookDao.addBook(book)
 

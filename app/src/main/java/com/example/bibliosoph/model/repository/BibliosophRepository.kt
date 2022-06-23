@@ -9,6 +9,8 @@ interface BibliosophRepository {
 
     suspend fun getBooks(): List<BookAndGenre>
 
+    suspend fun getBooksIds(): List<Int>
+
     suspend fun addBook(book: Book)
 
     suspend fun removeBook(book: Book)

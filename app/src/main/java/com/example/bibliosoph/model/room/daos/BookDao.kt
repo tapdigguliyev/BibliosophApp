@@ -11,6 +11,9 @@ interface BookDao {
     @Query("SELECT * FROM books")
     suspend fun getBooks(): List<BookAndGenre> //TODO: Kotlin Flow may be required in the future
 
+    @Query("SELECT id FROM books")
+    suspend fun getBooksIds(): List<String>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addBook(book: Book)
 
