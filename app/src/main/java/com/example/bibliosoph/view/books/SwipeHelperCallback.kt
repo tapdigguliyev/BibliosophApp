@@ -8,18 +8,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliosoph.R
 
-class SwipeHelperCallback(context: Context, private val listener: ItemTouchHelperListener) : ItemTouchHelper.Callback() {
-
-    override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        val swipeFlags = ItemTouchHelper.START
-        return makeMovementFlags(0, swipeFlags)
-    }
+abstract class SwipeHelperCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.START) {
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder) = false
-
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        listener.onItemDismiss(viewHolder.adapterPosition)
-    }
 
     private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_white_24)
     private val intrinsicWidth = deleteIcon?.intrinsicWidth

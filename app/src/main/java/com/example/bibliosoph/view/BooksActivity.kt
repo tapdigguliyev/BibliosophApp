@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliosoph.app.BibliosophApplication
 import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
@@ -56,7 +57,23 @@ class BooksActivity : AppCompatActivity() {
         binding.booksRecyclerView.adapter = adapter
         binding.booksRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        val itemTouchHelper = ItemTouchHelper(SwipeHelperCallback(this, adapter))
+        configureSwipeToDeleteHandler()
+    }
+
+    private fun configureSwipeToDeleteHandler() {
+        val swipeHandler = object : SwipeHelperCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                lifecycleScope.launch {
+                    val booksAdapter = binding.booksRecyclerView.adapter as BooksAdapter
+                    val booksAndGenres = repository.getBooks()
+
+                    repository.removeBook(booksAndGenres[viewHolder.adapterPosition].book)
+                    booksAdapter.removeBookAtPosition(viewHolder.adapterPosition)
+                }
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.booksRecyclerView)
     }
 
