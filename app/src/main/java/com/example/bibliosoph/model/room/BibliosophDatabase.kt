@@ -9,10 +9,11 @@ import com.example.bibliosoph.model.Book
 import com.example.bibliosoph.model.Genre
 import com.example.bibliosoph.model.room.daos.BookDao
 import com.example.bibliosoph.model.room.daos.GenreDao
+import com.example.bibliosoph.model.room.migrations.migration_1_2
 import com.example.bibliosoph.model.room.typeconverters.DateConverter
 
 
-const val DATABASE_VERSION = 1
+const val DATABASE_VERSION = 2
 
 @Database(
     entities = [Book::class, Genre::class],
@@ -32,7 +33,7 @@ abstract class BibliosophDatabase : RoomDatabase() {
                 BibliosophDatabase::class.java,
                 DATABASE_NAME
             )
-                .allowMainThreadQueries()
+                .addMigrations(migration_1_2)
                 .build()
         }
     }

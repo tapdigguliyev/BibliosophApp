@@ -17,6 +17,7 @@ data class Book(
 //    @TypeConverters(DateConverter::class)
     var endDate: String? = null,
     var pageNumber: String? = null,
+    var writerName: String? = null,
     @ColumnInfo(name = "bookGenreId")
     var genreId: String? = null,
     var isCompleted: Boolean? = false
