@@ -43,6 +43,7 @@ class AddBookActivity : AppCompatActivity() {
         val endDate = binding.addEndDate.text.toString()
         val pageCount = binding.addPageCount.text.toString()
         val genreId = repository.getGenres().firstOrNull { it.name == binding.addGenreSpinner.selectedItem }?.id
+        val writerName = binding.addWriterName.text.toString()
 
         if (bookId.isNotBlank() && bookName.isNotBlank() && !genreId.isNullOrBlank()) {
             repository.addBook(
@@ -52,6 +53,7 @@ class AddBookActivity : AppCompatActivity() {
                     startDate = startDate,
                     endDate = endDate,
                     pageNumber = pageCount,
+                    writerName = writerName,
                     genreId = genreId
                 )
             )

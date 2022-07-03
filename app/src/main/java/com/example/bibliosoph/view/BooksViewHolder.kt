@@ -15,7 +15,6 @@ class BooksViewHolder(private val binding: ItemBookBinding): RecyclerView.ViewHo
         binding.endDate.text = book.endDate
         binding.pageCount.text = book.pageNumber
         binding.genre.text = genre.name
-        binding.startDate.text = book.startDate
-        binding.endDate.text = book.endDate
+        binding.writerName.text = book.writerName
     }
 }

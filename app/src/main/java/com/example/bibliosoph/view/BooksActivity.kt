@@ -32,7 +32,10 @@ class BooksActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBooksBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
 
+    override fun onStart() {
+        super.onStart()
         initUi()
     }
 

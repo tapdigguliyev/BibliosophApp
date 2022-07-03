@@ -10,4 +10,5 @@
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
     <string name="deleteColor">#FF0000</string>
+    <string name="writer_name">Writer</string>
 </resources>

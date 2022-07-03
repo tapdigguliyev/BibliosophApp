@@ -59,6 +59,20 @@
             app:layout_constraintTop_toBottomOf="@id/bookName"/>
 
         <TextView
+            android:id="@+id/writerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/book_item_text_size"
+            android:gravity="end"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginStart="@dimen/padding_standard"
+            app:layout_constraintStart_toEndOf="@id/genre"
+            app:layout_constraintEnd_toEndOf="@id/endDate"
+            app:layout_constraintTop_toBottomOf="@id/bookName"
+            tools:text="Writer" />
+
+        <TextView
             android:id="@+id/startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
