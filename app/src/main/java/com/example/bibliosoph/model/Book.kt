@@ -12,10 +12,10 @@ data class Book(
     @PrimaryKey
     val id: String,
     val name: String,
-//    @TypeConverters(DateConverter::class)
-    var startDate: String? = null,
-//    @TypeConverters(DateConverter::class)
-    var endDate: String? = null,
+    @TypeConverters(DateConverter::class)
+    var startDate: Date? = null,
+    @TypeConverters(DateConverter::class)
+    var endDate: Date? = null,
     var pageNumber: String? = null,
     var writerName: String? = null,
     @ColumnInfo(name = "bookGenreId")

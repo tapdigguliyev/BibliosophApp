@@ -6,9 +6,9 @@ import java.util.*
 class DateConverter {
     @TypeConverter
     fun fromTimeStamp(value: Long?): Date? {
-        return Date(value ?: 0)
+        return value?.let { Date(it) }
     }
 
     @TypeConverter
-    fun dateToTimeStamp(date: Date?): Long? = date?.time ?: 0
+    fun dateToTimeStamp(date: Date?): Long? = date?.time
 }

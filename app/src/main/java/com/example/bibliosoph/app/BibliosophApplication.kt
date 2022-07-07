@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class BibliosophApplication : Application() {
 
     companion object{
-        private lateinit var instance: BibliosophApplication
+        lateinit var instance: BibliosophApplication
 
         private val database: BibliosophDatabase by lazy {
             BibliosophDatabase.buildDatabase(instance)

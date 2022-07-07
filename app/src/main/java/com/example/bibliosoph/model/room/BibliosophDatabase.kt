@@ -21,7 +21,7 @@ const val DATABASE_VERSION = 2
     exportSchema = false
 )
 
-//@TypeConverters(DateConverter::class)
+@TypeConverters(DateConverter::class)
 abstract class BibliosophDatabase : RoomDatabase() {
 
     companion object {

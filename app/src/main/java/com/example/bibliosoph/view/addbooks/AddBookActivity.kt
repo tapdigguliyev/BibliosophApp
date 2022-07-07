@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.bibliosoph.R
 import com.example.bibliosoph.app.BibliosophApplication
+import com.example.bibliosoph.app.stringToDate
 import com.example.bibliosoph.databinding.ActivityAddBookBinding
 import com.example.bibliosoph.model.Book
 import kotlinx.coroutines.launch
@@ -28,8 +29,8 @@ class AddBookActivity : AppCompatActivity() {
     }
 
     private fun initUi() = lifecycleScope.launch {
-        setDate(binding.addStartDate)
-        setDate(binding.addEndDate)
+        configureDatePickerDialog(binding.addStartDate)
+        configureDatePickerDialog(binding.addEndDate)
         configureGenreSelectionSpinner()
         binding.addBook.setOnClickListener {
                 generateBook()
@@ -39,8 +40,8 @@ class AddBookActivity : AppCompatActivity() {
     private fun generateBook() = lifecycleScope.launch {
         val bookId = binding.addBookId.text.toString()
         val bookName = binding.addBookName.text.toString()
-        val startDate = binding.addStartDate.text.toString()
-        val endDate = binding.addEndDate.text.toString()
+        val startDate = binding.addStartDate.text.toString().stringToDate()
+        val endDate = binding.addEndDate.text.toString().stringToDate()
         val pageCount = binding.addPageCount.text.toString()
         val genreId = repository.getGenres().firstOrNull { it.name == binding.addGenreSpinner.selectedItem }?.id
         val writerName = binding.addWriterName.text.toString()
@@ -68,14 +69,14 @@ class AddBookActivity : AppCompatActivity() {
         binding.addGenreSpinner.adapter = adapter
     }
 
-    private fun setDate(view: TextView) {
+    private fun configureDatePickerDialog(view: TextView) {
         val myCalendar = Calendar.getInstance()
 
         val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateLabel(myCalendar, view)
+            updateDateLabel(myCalendar, view)
         }
 
         view.setOnClickListener {
@@ -90,8 +91,8 @@ class AddBookActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateLabel(myCalendar: Calendar, view: TextView) {
-        val myFormat = getString(R.string.date_format)
+    private fun updateDateLabel(myCalendar: Calendar, view: TextView) {
+        val myFormat = getString(R.string.date_label)
         val simpleDateFormat = SimpleDateFormat(myFormat, Locale.UK)
         view.text = simpleDateFormat.format(myCalendar.time)
     }
