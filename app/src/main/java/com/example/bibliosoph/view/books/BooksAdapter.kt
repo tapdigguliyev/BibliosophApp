@@ -1,4 +1,4 @@
-package com.example.bibliosoph.view
+package com.example.bibliosoph.view.books
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.example.bibliosoph.view
+package com.example.bibliosoph.view.books
 
 import android.content.Context
 import android.content.Intent
@@ -13,7 +13,6 @@ import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
 import com.example.bibliosoph.databinding.ActivityBooksBinding
 import com.example.bibliosoph.view.addbooks.AddBookActivity
-import com.example.bibliosoph.view.books.SwipeHelperCallback
 import kotlinx.coroutines.launch
 
 class BooksActivity : AppCompatActivity() {
