@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import com.example.bibliosoph.R
-import com.example.bibliosoph.app.BibliosophApplication
 import com.example.bibliosoph.app.stringToDate
 import com.example.bibliosoph.databinding.ActivityAddBookBinding
-import com.example.bibliosoph.model.Book
+import com.example.bibliosoph.viewmodel.AddBookActivityViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,12 +19,14 @@ import java.util.*
 class AddBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBookBinding
-    private val repository by lazy { BibliosophApplication.repository }
+    private lateinit var viewModel: AddBookActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBookBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this)[AddBookActivityViewModel::class.java]
 
         initUi()
     }
@@ -37,33 +40,21 @@ class AddBookActivity : AppCompatActivity() {
             }
         }
 
-    private fun generateBook() = lifecycleScope.launch {
-        val bookId = binding.addBookId.text.toString()
-        val bookName = binding.addBookName.text.toString()
-        val startDate = binding.addStartDate.text.toString().stringToDate()
-        val endDate = binding.addEndDate.text.toString().stringToDate()
-        val pageCount = binding.addPageCount.text.toString()
-        val genreId = repository.getGenres().firstOrNull { it.name == binding.addGenreSpinner.selectedItem }?.id
-        val writerName = binding.addWriterName.text.toString()
+    private fun generateBook() = viewModel.viewModelScope.launch {
+        viewModel.bookId = binding.addBookId.text.toString()
+        viewModel.bookName = binding.addBookName.text.toString()
+        viewModel.startDate = binding.addStartDate.text.toString().stringToDate()
+        viewModel.endDate = binding.addEndDate.text.toString().stringToDate()
+        viewModel.pageCount = binding.addPageCount.text.toString()
+        viewModel.genreId = viewModel.getGenres().firstOrNull { it.name == binding.addGenreSpinner.selectedItem }?.id
+        viewModel.writerName = binding.addWriterName.text.toString()
 
-        if (bookId.isNotBlank() && bookName.isNotBlank() && !genreId.isNullOrBlank()) {
-            repository.addBook(
-                Book(
-                    id = bookId,
-                    name = bookName,
-                    startDate = startDate,
-                    endDate = endDate,
-                    pageNumber = pageCount,
-                    writerName = writerName,
-                    genreId = genreId
-                )
-            )
-        }
+        viewModel.addBook()
         finish()
     }
 
     private fun configureGenreSelectionSpinner() = lifecycleScope.launch {
-        val genres = repository.getGenres().map{ it.name }
+        val genres = viewModel.getGenres().map{ it.name }
 
         val adapter = ArrayAdapter(this@AddBookActivity, android.R.layout.simple_spinner_item, genres)
         binding.addGenreSpinner.adapter = adapter

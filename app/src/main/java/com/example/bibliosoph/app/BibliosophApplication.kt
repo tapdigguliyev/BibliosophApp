@@ -13,7 +13,7 @@ class BibliosophApplication : Application() {
     companion object{
         lateinit var instance: BibliosophApplication
 
-        private val database: BibliosophDatabase by lazy {
+        val database: BibliosophDatabase by lazy {
             BibliosophDatabase.buildDatabase(instance)
         }
 
@@ -28,30 +28,5 @@ class BibliosophApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
-        GlobalScope.launch {
-            if (repository.getGenres().isEmpty()) {
-                repository.addGenres(
-                    listOf(
-                        Genre(name = "Action"),
-                        Genre(name = "Adventure"),
-                        Genre(name = "Classic"),
-                        Genre(name = "Philosophy"),
-                        Genre(name = "Mystery"),
-                        Genre(name = "Fantasy"),
-                        Genre(name = "Sci-Fi"),
-                        Genre(name = "History"),
-                        Genre(name = "Horror"),
-                        Genre(name = "Romance"),
-                        Genre(name = "Short Story"),
-                        Genre(name = "Biography"),
-                        Genre(name = "Poetry"),
-                        Genre(name = "Self-Help"),
-                        Genre(name = "Young novel"),
-                        Genre(name = "Dystopian")
-                    )
-                )
-            }
-        }
     }
 }
