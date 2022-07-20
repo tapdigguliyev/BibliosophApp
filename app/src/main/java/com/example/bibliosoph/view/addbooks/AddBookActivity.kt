@@ -2,6 +2,8 @@ package com.example.bibliosoph.view.addbooks
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -58,6 +60,16 @@ class AddBookActivity : AppCompatActivity() {
 
         val adapter = ArrayAdapter(this@AddBookActivity, android.R.layout.simple_spinner_item, genres)
         binding.addGenreSpinner.adapter = adapter
+        binding.addGenreSpinner.setSelection(viewModel.selectedSpinnerItemPosition)
+
+        binding.addGenreSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                viewModel.selectedSpinnerItemPosition = position
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 
     private fun configureDatePickerDialog(view: TextView) {

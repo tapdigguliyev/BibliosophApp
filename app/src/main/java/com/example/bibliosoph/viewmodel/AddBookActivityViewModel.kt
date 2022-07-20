@@ -52,6 +52,8 @@ class AddBookActivityViewModel(
     var writerName: String? = ""
     var genreId: String? = ""
 
+    var selectedSpinnerItemPosition = 0
+
     suspend fun addBook() {
         if (bookId.isNotBlank() && bookName.isNotBlank() && !genreId.isNullOrBlank()) {
             repository.addBook(
