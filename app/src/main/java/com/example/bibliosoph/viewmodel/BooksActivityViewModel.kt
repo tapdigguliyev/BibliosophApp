@@ -13,6 +13,6 @@ class BooksActivityViewModel(
             BibliosophApplication.database.genreDao()
         )) : ViewModel() {
 
-    suspend fun getBooks() = repository.getBooks()
+    suspend fun getBooks() = repository.getBooks().reversed()
     suspend fun removeBook(book: Book) = repository.removeBook(book)
 }

@@ -62,6 +62,20 @@ class BooksActivity : AppCompatActivity() {
         binding.booksRecyclerView.adapter = adapter
         binding.booksRecyclerView.layoutManager = LinearLayoutManager(this)
 
+        binding.booksRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 1 && binding.addBookFloatingActionButton.isShown) {
+                    binding.addBookFloatingActionButton.hide()
+                } else if (dy < -1 && !binding.addBookFloatingActionButton.isShown) {
+                    binding.addBookFloatingActionButton.show()
+                } else if (binding.booksRecyclerView.canScrollVertically(-1)) {
+                    binding.addBookFloatingActionButton.show()
+                }
+            }
+        })
+
         configureSwipeToDeleteHandler()
     }
 
