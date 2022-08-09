@@ -3,7 +3,10 @@ package com.example.bibliosoph.view.books
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -11,15 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
-import com.example.bibliosoph.databinding.ActivityBooksBinding
+import com.example.bibliosoph.databinding.FragmentBooksBinding
 import com.example.bibliosoph.view.addbooks.AddBookActivity
-import com.example.bibliosoph.viewmodel.BooksActivityViewModel
+import com.example.bibliosoph.viewmodel.BooksFragmentViewModel
 import kotlinx.coroutines.launch
 
-class BooksActivity : AppCompatActivity() {
+class BooksFragment : Fragment() {
 
-    private lateinit var binding: ActivityBooksBinding
-    private lateinit var viewModel: BooksActivityViewModel
+    private lateinit var binding: FragmentBooksBinding
+    private lateinit var viewModel: BooksFragmentViewModel
     private val adapter by lazy { BooksAdapter() }
 
     companion object{
@@ -30,10 +33,12 @@ class BooksActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBooksBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        viewModel = ViewModelProvider(this)[BooksFragmentViewModel::class.java]
+    }
 
-        viewModel = ViewModelProvider(this)[BooksActivityViewModel::class.java]
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentBooksBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart() {
@@ -54,13 +59,17 @@ class BooksActivity : AppCompatActivity() {
         }
 
         binding.addBookFloatingActionButton.setOnClickListener {
-            startActivity(intent(this))
+            activity?.let {
+                startActivity(intent(it))
+            }
         }
     }
 
     private fun setupRecyclerView() {
-        binding.booksRecyclerView.adapter = adapter
-        binding.booksRecyclerView.layoutManager = LinearLayoutManager(this)
+        activity?.let {
+            binding.booksRecyclerView.adapter = adapter
+            binding.booksRecyclerView.layoutManager = LinearLayoutManager(it)
+        }
 
         binding.booksRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -80,20 +89,22 @@ class BooksActivity : AppCompatActivity() {
     }
 
     private fun configureSwipeToDeleteHandler() {
-        val swipeHandler = object : SwipeHelperCallback(this) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        activity?.let {
+            val swipeHandler = object : SwipeHelperCallback(it) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                lifecycleScope.launch {
-                    val booksAdapter = binding.booksRecyclerView.adapter as BooksAdapter
-                    val booksAndGenres = viewModel.getBooks()
+                    lifecycleScope.launch {
+                        val booksAdapter = binding.booksRecyclerView.adapter as BooksAdapter
+                        val booksAndGenres = viewModel.getBooks()
 
-                    viewModel.removeBook(booksAndGenres[viewHolder.adapterPosition].book)
-                    booksAdapter.removeBookAtPosition(viewHolder.adapterPosition)
+                        viewModel.removeBook(booksAndGenres[viewHolder.adapterPosition].book)
+                        booksAdapter.removeBookAtPosition(viewHolder.adapterPosition)
+                    }
                 }
             }
+            val itemTouchHelper = ItemTouchHelper(swipeHandler)
+            itemTouchHelper.attachToRecyclerView(binding.booksRecyclerView)
         }
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding.booksRecyclerView)
     }
 
     private fun loadBooks() = lifecycleScope.launch{

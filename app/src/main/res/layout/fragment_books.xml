@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.books.BooksActivity">
+    tools:context=".view.books.BooksFragment">
 
     <TextView
         android:id="@+id/noBooks"
@@ -32,12 +32,11 @@
         android:id="@+id/addBookFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="@dimen/padding_standard_double"
         android:layout_marginBottom="@dimen/padding_standard_double"
+        android:contentDescription="@string/add_book"
         android:src="@drawable/ic_baseline_add_24"
-        android:contentDescription="@string/add_book" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

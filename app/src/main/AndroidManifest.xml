@@ -18,7 +18,7 @@
             android:name=".view.addbooks.AddBookActivity"
             android:exported="false" />
         <activity
-            android:name=".view.books.BooksActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

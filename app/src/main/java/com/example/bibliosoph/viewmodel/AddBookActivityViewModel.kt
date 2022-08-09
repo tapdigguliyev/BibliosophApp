@@ -19,7 +19,7 @@ class AddBookActivityViewModel(
 
     init {
         viewModelScope.launch {
-            if (repository.getGenres().isEmpty()) {
+            if (getGenres().isEmpty()) {
                 repository.addGenres(
                     listOf(
                         Genre(name = "Action"),

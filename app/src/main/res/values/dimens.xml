@@ -5,4 +5,5 @@
     <dimen name="book_item_text_size">20sp</dimen>
     <dimen name="padding_standard_double">32dp</dimen>
     <dimen name="padding_standard">16dp</dimen>
+    <dimen name="nav_bar_height">50dp</dimen>
 </resources>

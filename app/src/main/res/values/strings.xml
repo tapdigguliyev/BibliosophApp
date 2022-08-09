@@ -11,4 +11,6 @@
     <string name="end_date">End date</string>
     <string name="deleteColor">#FF0000</string>
     <string name="writer_name">Writer</string>
+    <string name="navMenuHome">Home</string>
+    <string name="navMenuBooks">Books</string>
 </resources>

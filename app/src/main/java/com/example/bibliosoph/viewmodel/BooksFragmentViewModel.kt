@@ -6,7 +6,7 @@ import com.example.bibliosoph.model.Book
 import com.example.bibliosoph.model.repository.BibliosophRepository
 import com.example.bibliosoph.model.repository.BibliosophRepositoryImpl
 
-class BooksActivityViewModel(
+class BooksFragmentViewModel(
     private val repository: BibliosophRepository =
         BibliosophRepositoryImpl(
             BibliosophApplication.database.bookDao(),
