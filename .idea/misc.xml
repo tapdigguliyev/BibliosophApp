@@ -5,12 +5,20 @@
       <map>
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1785" />
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1785" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/drawable/nav_bar_item_color.xml" value="0.197" />
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/activity_add_book.xml" value="0.25416666666666665" />
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/activity_books.xml" value="0.25416666666666665" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/activity_google_books.xml" value="0.25416666666666665" />
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/activity_main.xml" value="0.19202898550724637" />
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/book_item.xml" value="0.253125" />
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/fragment_add_book.xml" value="0.25416666666666665" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/fragment_books.xml" value="0.24010416666666667" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/fragment_google_books.xml" value="0.25416666666666665" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/fragment_suggestions.xml" value="0.25416666666666665" />
         <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/item_book.xml" value="0.264" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/layout/item_google_books.xml" value="0.25416666666666665" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/importante/android/personalProjects/app/src/main/res/menu/nav_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

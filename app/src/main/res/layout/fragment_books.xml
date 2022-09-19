@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.books.BooksActivity">
+    tools:context=".view.books.BooksFragment">
 
     <TextView
         android:id="@+id/noBooks"

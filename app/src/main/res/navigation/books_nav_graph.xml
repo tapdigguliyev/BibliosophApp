@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/books_nav_graph"
+    app:startDestination="@id/googleBooksFragment">
+
+    <fragment
+        android:id="@+id/googleBooksFragment"
+        android:name="com.example.bibliosoph.view.books.GoogleBooksFragment"
+        android:label="fragment_google_books"
+        tools:layout="@layout/fragment_google_books" />
+    <fragment
+        android:id="@+id/booksFragment"
+        android:name="com.example.bibliosoph.view.books.BooksFragment"
+        android:label="fragment_books"
+        tools:layout="@layout/fragment_books" />
+</navigation>

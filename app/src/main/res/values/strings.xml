@@ -11,4 +11,6 @@
     <string name="end_date">End date</string>
     <string name="deleteColor">#FF0000</string>
     <string name="writer_name">Writer</string>
+    <string name="my_books">My Books</string>
+    <string name="google_books">Google Books</string>
 </resources>
