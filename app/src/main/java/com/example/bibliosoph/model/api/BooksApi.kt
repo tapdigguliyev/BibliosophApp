@@ -12,6 +12,10 @@ interface BooksApi {
     suspend fun getSearchBooks(
         @Query("q")
         searchQuery: String,
+        @Query("maxResults")
+        maxResults: String,
+        @Query("startIndex")
+        startIndex: String = "0",
         @Query("key")
         apiKey: String = API_KEY
     ) : Response<GoogleBooksResponse>

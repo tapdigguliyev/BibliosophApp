@@ -1,4 +1,4 @@
-package com.example.bibliosoph.view.books
+package com.example.bibliosoph.view.books.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliosoph.app.dateToString

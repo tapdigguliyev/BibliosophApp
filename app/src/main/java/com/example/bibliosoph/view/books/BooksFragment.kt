@@ -16,6 +16,7 @@ import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
 import com.example.bibliosoph.databinding.FragmentBooksBinding
 import com.example.bibliosoph.view.addbooks.AddBookActivity
+import com.example.bibliosoph.view.books.adapter.BooksAdapter
 import com.example.bibliosoph.viewmodel.BooksFragmentViewModel
 import kotlinx.coroutines.launch
 
