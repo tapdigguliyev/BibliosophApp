@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val booksRepository = GoogleBooksRepository()
-        val viewModelProviderFactory = GoogleBooksViewModelProviderFactory(booksRepository)
+        val viewModelProviderFactory = GoogleBooksViewModelProviderFactory(application, booksRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[GoogleBooksViewModel::class.java]
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.booksNavHostFragment) as NavHostFragment
