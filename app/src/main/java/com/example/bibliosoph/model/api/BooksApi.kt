@@ -16,6 +16,8 @@ interface BooksApi {
         maxResults: String,
         @Query("startIndex")
         startIndex: String = "0",
+        @Query("printType")
+        printType: String = "books",
         @Query("key")
         apiKey: String = API_KEY
     ) : Response<GoogleBooksResponse>
