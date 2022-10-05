@@ -1,16 +1,13 @@
 package com.example.bibliosoph.app
 
 import android.app.Application
-import com.example.bibliosoph.model.room.BibliosophDatabase
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class BibliosophApplication : Application() {
 
     companion object{
         lateinit var instance: BibliosophApplication
-
-        val database: BibliosophDatabase by lazy {
-            BibliosophDatabase.buildDatabase(instance)
-        }
     }
 
     override fun onCreate() {

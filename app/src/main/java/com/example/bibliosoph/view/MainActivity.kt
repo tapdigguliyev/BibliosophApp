@@ -13,18 +13,31 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bibliosoph.R
 import com.example.bibliosoph.databinding.ActivityMainBinding
+import com.example.bibliosoph.model.repository.BibliosophRepository
 import com.example.bibliosoph.model.repository.GoogleBooksRepository
+import com.example.bibliosoph.viewmodel.BooksFragmentViewModel
+import com.example.bibliosoph.viewmodel.BooksFragmentViewModelFactory
 import com.example.bibliosoph.viewmodel.GoogleBooksViewModel
 import com.example.bibliosoph.viewmodel.GoogleBooksViewModelProviderFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: GoogleBooksViewModel
+    lateinit var booksFragmentViewModel: BooksFragmentViewModel
+
+    @Inject
+    lateinit var repository: BibliosophRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val booksFragmentViewModelFactory = BooksFragmentViewModelFactory(repository)
+        booksFragmentViewModel = ViewModelProvider(this, booksFragmentViewModelFactory)[BooksFragmentViewModel::class.java]
 
         val booksRepository = GoogleBooksRepository()
         val viewModelProviderFactory = GoogleBooksViewModelProviderFactory(application, booksRepository)

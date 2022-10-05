@@ -6,8 +6,9 @@ import com.example.bibliosoph.model.Genre
 import com.example.bibliosoph.model.room.daos.BookDao
 import com.example.bibliosoph.model.room.daos.GenreDao
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class BibliosophRepositoryImpl(
+class BibliosophRepositoryImpl @Inject constructor(
     private val bookDao: BookDao,
     private val genreDao: GenreDao
 ) : BibliosophRepository {

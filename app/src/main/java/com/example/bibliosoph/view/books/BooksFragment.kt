@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
 import com.example.bibliosoph.databinding.FragmentBooksBinding
+import com.example.bibliosoph.view.MainActivity
 import com.example.bibliosoph.view.addbooks.AddBookActivity
 import com.example.bibliosoph.view.books.adapter.BooksAdapter
 import com.example.bibliosoph.viewmodel.BooksFragmentViewModel
@@ -38,7 +38,7 @@ class BooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[BooksFragmentViewModel::class.java]
+        viewModel = (activity as MainActivity).booksFragmentViewModel
     }
 
     override fun onStart() {

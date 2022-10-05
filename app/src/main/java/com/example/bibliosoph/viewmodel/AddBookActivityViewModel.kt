@@ -2,20 +2,18 @@ package com.example.bibliosoph.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bibliosoph.app.BibliosophApplication
 import com.example.bibliosoph.model.Book
 import com.example.bibliosoph.model.Genre
 import com.example.bibliosoph.model.repository.BibliosophRepository
-import com.example.bibliosoph.model.repository.BibliosophRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class AddBookActivityViewModel(
-    private val repository: BibliosophRepository =
-        BibliosophRepositoryImpl(
-            BibliosophApplication.database.bookDao(),
-            BibliosophApplication.database.genreDao()
-        )) : ViewModel() {
+@HiltViewModel
+class AddBookActivityViewModel @Inject constructor(
+    private val repository: BibliosophRepository
+    ) : ViewModel() {
 
     init {
         viewModelScope.launch {
