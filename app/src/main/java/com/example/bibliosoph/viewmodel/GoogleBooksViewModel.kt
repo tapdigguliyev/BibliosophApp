@@ -1,23 +1,30 @@
 package com.example.bibliosoph.viewmodel
 
-import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities.*
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bibliosoph.app.BibliosophApplication
 import com.example.bibliosoph.model.googlebook.GoogleBooksResponse
 import com.example.bibliosoph.model.repository.GoogleBooksRepository
 import com.example.bibliosoph.other.Constants.Companion.QUERY_PAGE_SIZE
 import com.example.bibliosoph.other.Resource
+import dagger.hilt.android.internal.Contexts.getApplication
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
+import javax.inject.Inject
 
-class GoogleBooksViewModel(app: Application, private val booksRepository: GoogleBooksRepository) : AndroidViewModel(app) {
+@HiltViewModel
+class GoogleBooksViewModel @Inject constructor(
+    @ApplicationContext private val context: Context, //https://issuetracker.google.com/issues/206207283  doesn't leak a context object
+    private val booksRepository: GoogleBooksRepository
+    ) : ViewModel() {
+
     val searchBooks: MutableLiveData<Resource<GoogleBooksResponse>> = MutableLiveData()
     var searchBooksResponse: GoogleBooksResponse? = null
 //    var searchBooksPage = 1
@@ -75,7 +82,7 @@ class GoogleBooksViewModel(app: Application, private val booksRepository: Google
     }
 
     private fun hasInternetConnection(): Boolean {
-        val connectivityManager = getApplication<BibliosophApplication>().getSystemService(
+        val connectivityManager = getApplication(context).getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
 

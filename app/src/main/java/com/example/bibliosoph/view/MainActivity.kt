@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var repository: BibliosophRepository
 
+    @Inject
+    lateinit var booksRepository: GoogleBooksRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -39,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         val booksFragmentViewModelFactory = BooksFragmentViewModelFactory(repository)
         booksFragmentViewModel = ViewModelProvider(this, booksFragmentViewModelFactory)[BooksFragmentViewModel::class.java]
 
-        val booksRepository = GoogleBooksRepository()
         val viewModelProviderFactory = GoogleBooksViewModelProviderFactory(application, booksRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[GoogleBooksViewModel::class.java]
 
