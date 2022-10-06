@@ -6,38 +6,29 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.example.bibliosoph.R
 import com.example.bibliosoph.app.stringToDate
 import com.example.bibliosoph.databinding.ActivityAddBookBinding
-import com.example.bibliosoph.model.repository.BibliosophRepository
 import com.example.bibliosoph.viewmodel.AddBookActivityViewModel
-import com.example.bibliosoph.viewmodel.AddBookActivityViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBookBinding
-    private lateinit var viewModel: AddBookActivityViewModel
-
-    @Inject
-    lateinit var repository: BibliosophRepository
+    private val viewModel: AddBookActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBookBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val viewModelFactory = AddBookActivityViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[AddBookActivityViewModel::class.java]
 
         initUi()
     }

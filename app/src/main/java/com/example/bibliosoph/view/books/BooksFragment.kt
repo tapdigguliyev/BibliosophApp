@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,15 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bibliosoph.app.gone
 import com.example.bibliosoph.app.visible
 import com.example.bibliosoph.databinding.FragmentBooksBinding
-import com.example.bibliosoph.view.MainActivity
 import com.example.bibliosoph.view.addbooks.AddBookActivity
 import com.example.bibliosoph.view.books.adapter.BooksAdapter
 import com.example.bibliosoph.viewmodel.BooksFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class BooksFragment : Fragment() {
     private lateinit var binding: FragmentBooksBinding
-    private lateinit var viewModel: BooksFragmentViewModel
+    private val viewModel: BooksFragmentViewModel by viewModels()
     private val adapter by lazy { BooksAdapter() }
 
     companion object{
@@ -34,11 +36,6 @@ class BooksFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentBooksBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as MainActivity).booksFragmentViewModel
     }
 
     override fun onStart() {

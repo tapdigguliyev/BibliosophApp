@@ -9,6 +9,7 @@ import android.widget.AbsListView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,17 +17,18 @@ import com.example.bibliosoph.databinding.FragmentGoogleBooksBinding
 import com.example.bibliosoph.other.Constants.Companion.QUERY_PAGE_SIZE
 import com.example.bibliosoph.other.Constants.Companion.SEARCH_BOOKS_TIME_DELAY
 import com.example.bibliosoph.other.Resource
-import com.example.bibliosoph.view.MainActivity
 import com.example.bibliosoph.view.books.adapter.GoogleBooksAdapter
 import com.example.bibliosoph.viewmodel.GoogleBooksViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class GoogleBooksFragment : Fragment() {
     private lateinit var binding: FragmentGoogleBooksBinding
-    private lateinit var viewModel: GoogleBooksViewModel
+    private val viewModel: GoogleBooksViewModel by viewModels()
     private lateinit var googleBooksAdapter: GoogleBooksAdapter
 
     companion object{
@@ -40,7 +42,6 @@ class GoogleBooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as MainActivity).viewModel
 
         setupRecyclerView()
 
