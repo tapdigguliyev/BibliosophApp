@@ -1,8 +1,10 @@
 package com.example.bibliosoph.di
 
 import android.content.Context
+import android.net.ConnectivityManager
 import androidx.room.Room
 import com.example.bibliosoph.model.api.BooksApi
+import com.example.bibliosoph.model.api.NetworkStatusChecker
 import com.example.bibliosoph.model.repository.BibliosophRepository
 import com.example.bibliosoph.model.repository.BibliosophRepositoryImpl
 import com.example.bibliosoph.model.repository.GoogleBooksRepository
@@ -74,4 +76,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideGoogleBooksRepository(booksApi: BooksApi) = GoogleBooksRepository(booksApi)
+
+    @Provides
+    @Singleton
+    fun provideNetworkStatusChecker(@ApplicationContext context: Context): NetworkStatusChecker =
+        NetworkStatusChecker(context.getSystemService(ConnectivityManager::class.java))
 }

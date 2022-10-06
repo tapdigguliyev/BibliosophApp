@@ -1,19 +1,15 @@
 package com.example.bibliosoph.viewmodel
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities.*
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bibliosoph.model.api.NetworkStatusChecker
 import com.example.bibliosoph.model.googlebook.GoogleBooksResponse
 import com.example.bibliosoph.model.repository.GoogleBooksRepository
 import com.example.bibliosoph.other.Constants.Companion.QUERY_PAGE_SIZE
 import com.example.bibliosoph.other.Resource
-import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
@@ -21,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GoogleBooksViewModel @Inject constructor(
-    @ApplicationContext private val context: Context, //https://issuetracker.google.com/issues/206207283  doesn't leak a context object
-    private val booksRepository: GoogleBooksRepository
+    private val booksRepository: GoogleBooksRepository,
+    private val networkStatusChecker: NetworkStatusChecker
     ) : ViewModel() {
 
     val searchBooks: MutableLiveData<Resource<GoogleBooksResponse>> = MutableLiveData()
@@ -66,7 +62,7 @@ class GoogleBooksViewModel @Inject constructor(
     private suspend fun safeSearchBooks(searchQuery: String) {
         searchBooks.postValue(Resource.Loading())
         try {
-            if (hasInternetConnection()) {
+            if (networkStatusChecker.hasInternetConnection()) {
                 val response = booksRepository.getSearchBooks(searchQuery, QUERY_PAGE_SIZE.toString(), startIndex.toString())
                 searchBooks.postValue(handleSearchBooksResponse(response))
             } else {
@@ -78,22 +74,6 @@ class GoogleBooksViewModel @Inject constructor(
                 is IOException -> searchBooks.postValue(Resource.Error("Network Failure"))
                 else -> searchBooks.postValue(Resource.Error("Conversion Error"))
             }
-        }
-    }
-
-    private fun hasInternetConnection(): Boolean {
-        val connectivityManager = getApplication(context).getSystemService(
-            Context.CONNECTIVITY_SERVICE
-        ) as ConnectivityManager
-
-        val activeNetwork = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-
-        return when {
-            capabilities.hasTransport(TRANSPORT_WIFI) -> true
-            capabilities.hasTransport(TRANSPORT_CELLULAR) -> true
-            capabilities.hasTransport(TRANSPORT_ETHERNET) -> true
-            else -> false
         }
     }
 }

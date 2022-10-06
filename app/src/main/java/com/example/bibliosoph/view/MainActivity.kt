@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bibliosoph.R
 import com.example.bibliosoph.databinding.ActivityMainBinding
+import com.example.bibliosoph.model.api.NetworkStatusChecker
 import com.example.bibliosoph.model.repository.BibliosophRepository
 import com.example.bibliosoph.model.repository.GoogleBooksRepository
 import com.example.bibliosoph.viewmodel.BooksFragmentViewModel
@@ -34,6 +35,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var booksRepository: GoogleBooksRepository
 
+    @Inject
+    lateinit var networkStatusChecker: NetworkStatusChecker
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -42,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         val booksFragmentViewModelFactory = BooksFragmentViewModelFactory(repository)
         booksFragmentViewModel = ViewModelProvider(this, booksFragmentViewModelFactory)[BooksFragmentViewModel::class.java]
 
-        val viewModelProviderFactory = GoogleBooksViewModelProviderFactory(application, booksRepository)
+        val viewModelProviderFactory = GoogleBooksViewModelProviderFactory(booksRepository, networkStatusChecker)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[GoogleBooksViewModel::class.java]
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.booksNavHostFragment) as NavHostFragment
